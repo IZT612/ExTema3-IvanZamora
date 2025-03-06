@@ -1,9 +1,9 @@
 package fecha;
 
 public class Fecha {
-	private int d; //día
+	private int d; //dÃ­a
 	private int m; //mes
-	private int a; //año
+	private int a; //aÃ±o
 
 	
 	public Fecha() {
@@ -43,13 +43,13 @@ public class Fecha {
 		return diaCorrecto && mesCorrecto && anioCorrecto;
 	}
 
-	// Método esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
+	// MÃ©todo esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
 	private boolean esBisiesto() {
 		boolean esBisiesto = (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
 		return esBisiesto;
 	}
 
-	// Método diaSiguiente
+	// MÃ©todo diaSiguiente
 	public void diaSiguiente() {
 		d++;
 		if (!fechaCorrecta()) {
@@ -62,7 +62,7 @@ public class Fecha {
 		}
 	}
 
-	// Método toString
+	// MÃ©todo toString
 	public String toString() {
 		if (d < 10 && m < 10) {
 			return "0" + d + "-0" + m + "-" + a;
