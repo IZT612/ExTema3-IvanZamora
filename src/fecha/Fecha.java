@@ -1,9 +1,10 @@
 package fecha;
 
 public class Fecha {
-	private int d; //día
-	private int m; //mes
-	private int a; //año
+	public static final int DIEZ = 10;
+	private int diaFecha; //dï¿½a
+	private int mesFecha; //mes
+	private int anioFecha; //aï¿½o
 
 	
 	public Fecha() {
@@ -12,67 +13,73 @@ public class Fecha {
 
 	
 	public Fecha(int dia, int mes, int anio) {
-		this.d = dia;
-		this.m = mes;
-		this.a = anio;
+		this.diaFecha = dia;
+		this.mesFecha = mes;
+		this.anioFecha = anio;
 	}
 
 	
 	
 	public boolean fechaCorrecta() {
-		boolean diaCorrecto, mesCorrecto, anioCorrecto;
-		anioCorrecto = a > 0;
-		mesCorrecto = m >= 1 && m <= 12;
-		switch (m) {
+		boolean diaCorrecto;
+		boolean mesCorrecto; 
+		boolean anioCorrecto;
+		anioCorrecto = anioFecha > 0;
+		mesCorrecto = mesFecha >= 1 && mesFecha <= 12;
+		boolean diaMayor1 = diaFecha >= 1;
+		switch (mesFecha) {
 		case 2:
 			if (esBisiesto()) {
-				diaCorrecto = d >= 1 && d <= 29;
+				diaCorrecto = diaMayor1 && diaFecha <= 29;
 			} else {
-				diaCorrecto = d >= 1 && d <= 28;
+				diaCorrecto = diaMayor1 && diaFecha <= 28;
 			}
 			break;
 		case 4:
 		case 6:
 		case 9:
 		case 11:
-			diaCorrecto = d >= 1 && d <= 30;
+			diaCorrecto = diaMayor1 && diaFecha <= 30;
 			break;
 		default:
-			diaCorrecto = d >= 1 && d <= 31;
+			diaCorrecto = diaMayor1 && diaFecha <= 31;
 		}
 		return diaCorrecto && mesCorrecto && anioCorrecto;
 	}
 
-	// Método esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
+	// Mï¿½todo esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
 	private boolean esBisiesto() {
-		boolean esBisiesto = (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
-		return esBisiesto;
+		return anioFecha % 4 == 0 && anioFecha % 100 != 0 || anioFecha % 400 == 0;
 	}
 
-	// Método diaSiguiente
-	public void diaSiguiente() {
-		d++;
+	// Mï¿½todo diaSiguiente
+	public void nextDay() {
+		diaFecha++;
 		if (!fechaCorrecta()) {
-			d = 1;
-			m++;
+			diaFecha = 1;
+			mesFecha++;
 			if (!fechaCorrecta()) {
-				m = 1;
-				a++;
+				mesFecha = 1;
+				anioFecha++;
 			}
 		}
 	}
 
-	// Método toString
+	// Mï¿½todo toString
 	public String toString() {
-		if (d < 10 && m < 10) {
-			return "0" + d + "-0" + m + "-" + a;
-		} else if (d < 10 && m >= 10) {
-			return "0" + d + "-" + m + "-" + a;
-		} else if (d >= 10 && m < 10) {
-			return d + "-0" + m + "-" + a;
+		String informacion;
+		
+		if (diaFecha < DIEZ && mesFecha < 10) {
+			informacion = ("0" + diaFecha + "-0" + mesFecha + "-" + anioFecha);
+		} else if (diaFecha < 10 && mesFecha >= 10) {
+			informacion = ("0" + diaFecha + "-" + mesFecha + "-" + anioFecha);
+		} else if (diaFecha >= 10 && mesFecha < 10) {
+			informacion = (diaFecha + "-0" + mesFecha + "-" + anioFecha);
 		} else {
-			return d + "-" + m + "-" + a;
+			informacion = (diaFecha + "-" + mesFecha + "-" + anioFecha);
 		}
+		
+		return informacion;
 	}
 
 }
